@@ -24,3 +24,8 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.field_with_errors input {
+    border: red solid 0.5px;
+    border-radius: 4px;
+}

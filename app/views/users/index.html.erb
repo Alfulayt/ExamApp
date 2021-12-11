@@ -1,0 +1,44 @@
+<%= javascript_pack_tag 'forms_helper' %>
+
+<% if flash[:pass].blank? == false %>
+  <div class="bg-secondary p-3 text-white mb-1" id="copy-place" >
+    Hi <%= flash[:user]["name"] %>, this is your account, please use it to login <br>
+    User Email : <%= flash[:user]["email"] %> <br>
+    Password : <%= flash[:pass] %><br>
+    Good luck
+  </div>
+  <button id="copy_details" class="btn btn-info mb-3">Copy</button>
+<% end %>
+<br>
+<h1 class="float-start">Exam App Users</h1>
+<%= link_to "Add New", new_user_path ,class:"btn btn-primary float-end" %>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Email</th>
+    <th scope="col">Role</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @users.each do |user| %>
+  <tr>
+    <th scope="row"><%= user.id %></th>
+    <td><%= link_to user.name, user  %></td>
+    <td><%= user.email %></td>
+    <td><%= user.role %></td>
+    <td>
+      <%= link_to "Edit", edit_user_path(user.id), class:"btn btn-secondary btn-sm" %>
+      <%= link_to "Destroy", { action: :destroy, id: user.id },
+                  method: :delete,
+                  data: { confirm: "Are you sure?" },
+                  class:"btn btn-secondary btn-sm"%>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

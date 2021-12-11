@@ -1,0 +1,59 @@
+<div class="bg-light p-3">
+  <%= javascript_pack_tag 'forms_helper' %>
+  <%= form_with model: user do |form| %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+
+      <% user.errors.full_messages_for(:name).uniq.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control" %>
+      <% user.errors.full_messages_for(:email).uniq.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password, class: "form-label" %>
+      <div class="input-group">
+        <%= form.text_field :password, class: "form-control" %>
+        <div id="generate_pass" class="btn btn-outline-secondary">Generate</div>
+      </div>
+      <% user.errors.full_messages_for(:password).uniq.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password_confirmation, class: "form-label" %>
+      <%= form.text_field :password_confirmation, class: "form-control" %>
+      <% user.errors.full_messages_for(:password_confirmation).uniq.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+
+    <div class="row mb-3">
+      <% User.roles.keys.each do |role| %>
+        <div class="col">
+          <div class="form-check">
+            <%= form.radio_button :role, role, class: "form-check-input" %>
+            <%= form.label role.to_sym, class: "form-check-label" %>
+          </div>
+        </div>
+      <% end %>
+      <% user.errors.full_messages_for(:role).uniq.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
