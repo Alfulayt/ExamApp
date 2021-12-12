@@ -1,0 +1,41 @@
+<%= javascript_pack_tag 'tests_helper' %>
+
+<div class="bg-light p-3">
+
+  <%= form_with model: test do |form| %>
+
+    <div class="mb-3">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-control" %>
+
+      <% test.errors.full_messages_for(:title).uniq.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, class: "form-control" %>
+      <% test.errors.full_messages_for(:description).uniq.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+
+    <hr>
+
+    <h4 class="float-start">Test Questions</h4>
+    <a class="btn btn-success float-end text-white" id="add_new_question"><i class="fa fa-plus" aria-hidden="true"></i>
+      Add Question</a>
+    <br>
+
+
+    <div class="" id="questions_place">
+
+    </div>
+
+    <div>
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

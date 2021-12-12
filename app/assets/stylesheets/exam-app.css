@@ -25,7 +25,7 @@
     border-top-right-radius: 0;
 }
 
-.field_with_errors input {
+.field_with_errors input,.field_with_errors textarea {
     border: red solid 0.5px;
     border-radius: 4px;
 }

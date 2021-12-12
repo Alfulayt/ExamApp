@@ -1,0 +1,31 @@
+<h1 class="float-start">Exam App Tests</h1>
+
+<%= link_to "Add New", new_test_path ,class:"btn btn-primary float-end" %>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Title</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @tests.each do |test| %>
+    <tr>
+      <th scope="row"><%= test.id %></th>
+      <td><%= link_to test.title, test  %></td>
+
+      <td>
+        <%= link_to "Edit", edit_test_path(test.id), class:"btn btn-secondary btn-sm" %>
+        <%= link_to "Destroy", { action: :destroy, id: test.id },
+                    method: :delete,
+                    data: { confirm: "Are you sure?" },
+                    class:"btn btn-secondary btn-sm"%>
+      </td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>
