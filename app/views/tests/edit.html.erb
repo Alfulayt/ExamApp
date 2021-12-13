@@ -1,2 +1,7 @@
 <h1>Edit Test</h1>
+<small>Deletions for questions and options is not really effective</small>
+  <script>
+      const questions = JSON.parse('<%= raw @questions %>');
+  </script>
+
 <%= render "form", test: @test %>

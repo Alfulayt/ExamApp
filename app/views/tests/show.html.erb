@@ -4,6 +4,25 @@
     <p> Test Title : <%= @test.title %> </p>
     <p> Test description : <%= @test.description %> </p>
   </div>
+  <div class="mb-3">
+    <h3>Questions</h3>
+
+    <% @test.questions.map(&:with_options).each do |question|  %>
+      <div class="mb-3">
+        <p><b>Title:</b> <%= question[:title] %></p>
+        <p><b>Description:</b> <%= question[:description] %></p>
+        <h5>Options:</h5>
+        <% question[:options].each do |option| %>
+          <p><b>O:</b> <%= option.title %> <%= option.correct? ?  "✅" : ""  %> </p>
+        <% end %>
+      </div>
+      <hr >
+    <% end %>
+
+
+  </div>
+
+
 
   <div class="mb-3">
     <%= link_to "Edit", edit_test_path(@test.id), class:"btn btn-secondary btn-sm" %>
@@ -15,3 +34,4 @@
 
 
 </div>
+

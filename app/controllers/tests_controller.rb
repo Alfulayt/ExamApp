@@ -6,6 +6,7 @@ class TestsController < TeacherController
 
   def show
     @test = Test.find(params[:id])
+
   end
 
   def new
@@ -15,6 +16,7 @@ class TestsController < TeacherController
   def create
     @test = Test.new(test_params)
     @test.save
+
     ActiveRecord::Base.transaction do
       questions_param.require(:questions).each do |question|
         created_question = create_question(@test, question) if @test.persisted?
@@ -23,11 +25,13 @@ class TestsController < TeacherController
         end
       end
     end
+
     if @test
       redirect_to @test
     else
       render :new
     end
+
   end
 
   def create_question(test, question)
@@ -48,10 +52,12 @@ class TestsController < TeacherController
 
   def edit
     @test = Test.find(params[:id])
+    @questions = @test.questions.map(&:with_options).to_json
   end
 
   def update
     @test = Test.find(params[:id])
+    # TODO: fetch all edited questions and options if it's had id -> update , doesn't have -> create
     if @test.update(test_params)
 
       redirect_to @test
