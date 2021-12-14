@@ -7,7 +7,8 @@ class Question < ApplicationRecord
       id: id,
       title: title,
       description: description,
-      options: question_option
+      options: question_option.map(&:questions_only)
     }
   end
+
 end

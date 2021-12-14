@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_12_130213) do
+ActiveRecord::Schema.define(version: 2021_12_14_081349) do
 
   create_table "question_options", force: :cascade do |t|
     t.string "title"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 2021_12_12_130213) do
     t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
+  create_table "reresh_tokens", force: :cascade do |t|
+    t.string "encoded_token"
+    t.string "token"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_reresh_tokens_on_user_id"
+  end
+
   create_table "tests", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -47,10 +56,12 @@ ActiveRecord::Schema.define(version: 2021_12_12_130213) do
     t.integer "role", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "refresh_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "tests"
+  add_foreign_key "reresh_tokens", "users"
 end
