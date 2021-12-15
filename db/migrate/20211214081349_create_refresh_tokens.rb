@@ -1,4 +1,4 @@
-class CreateRereshTokens < ActiveRecord::Migration[6.1]
+class CreateRefreshTokens < ActiveRecord::Migration[6.1]
   def change
     create_table :refresh_tokens do |t|
       t.string :encoded_token
