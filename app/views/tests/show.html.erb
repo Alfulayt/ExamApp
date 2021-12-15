@@ -7,7 +7,7 @@
   <div class="mb-3">
     <h3>Questions</h3>
 
-    <% @test.questions.map(&:with_options).each do |question|  %>
+    <% @test.questions.map(&:with_options_correct).each do |question|  %>
       <div class="mb-3">
         <p><b>Title:</b> <%= question[:title] %></p>
         <p><b>Description:</b> <%= question[:description] %></p>

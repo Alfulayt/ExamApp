@@ -11,4 +11,13 @@ class Question < ApplicationRecord
     }
   end
 
+  def with_options_correct
+    {
+      id: id,
+      title: title,
+      description: description,
+      options: question_option
+    }
+  end
+
 end
