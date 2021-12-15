@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "21872e00-3ab4-4780-8edf-7ac3e6a60398",
+		"name": "Exam App API-endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Student Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson = pm.response.json();",
+							"pm.globals.set('login_token', responseJson[\"data\"][\"user_details\"][\"token\"])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n        \"email\": \"student@example.com\",\n        \"password\": \"12345678\"\n      \n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host_url}}/api/v1/auth_manager",
+					"host": [
+						"{{host_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth_manager"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tests List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson = pm.response.json();",
+							"pm.globals.set('test_id', responseJson[\"test\"][0][\"id\"])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{login_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host_url}}/api/v1/tests",
+					"host": [
+						"{{host_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test Questions & Options",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{login_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host_url}}/api/v1/tests/{{test_id}}/questions",
+					"host": [
+						"{{host_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tests",
+						"{{test_id}}",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Submit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{login_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"question_answers\": [\n        {\n            \"question_id\": 1,\n            \"answer_id\": 2\n        },\n        {\n            \"question_id\": 2,\n            \"answer_id\": 4\n        },\n        {\n            \"question_id\": 3,\n            \"answer_id\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host_url}}/api/v1/tests/1/submit",
+					"host": [
+						"{{host_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tests",
+						"1",
+						"submit"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host_url",
+			"value": "http://67.207.92.83/"
+		}
+	]
+}
