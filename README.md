@@ -20,7 +20,7 @@ rails server
 
 ### Online Admin URL:
 
-http://67.207.92.83/admin
+http://67.207.92.83
 
 >**Email:** teacher@example.com
 > 
